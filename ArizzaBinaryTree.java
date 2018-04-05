@@ -14,7 +14,7 @@ class Node
   }
 }
 
-public class BinaryTree
+class BinaryTree
 {
   protected Node root;
 
@@ -44,6 +44,8 @@ public class BinaryTree
     {
       return current;
     }
+
+    return current;
   }
 
   /*
@@ -57,48 +59,66 @@ public class BinaryTree
   }
 
   /*
-   * purpose: print the tree in inorder
+   * purpose: inorder traversal of the tree
    * input: node
    * return: nothing - prints out inorder
    */
-  public void printInorder()
+  public void inorder(Node node)
   {
-    if (root != null)
+    if (node != null)
     {
-      printInorder(root.left);
-      System.out.print(" " + root.num);
-      printInorder(root.right);
+      inorder(node.left);
+      System.out.print(" " + node.num);
+      inorder(node.right);
     }
   }
 
+  // runs inorder() with root node
+  public void printInorder()
+  {
+    inorder(root);
+  }
+
   /*
-   * purpose: print the tree in preorder
+   * purpose: preorder traversal of the tree
    * input: node
    * return: nothing - prints out preorder
    */
-  public void printPreorder()
+  public void preorder(Node node)
   {
-    if (root != null)
+    if (node != null)
     {
-      System.out.print(" " + root.num);
-      printPreorder(root.left);
-      printPreorder(root.right);
+      System.out.print(" " + node.num);
+      preorder(node.left);
+      preorder(node.right);
     }
   }
 
+  // runs preorder() with root node
+  public void printPreorder()
+  {
+    preorder(root);
+  }
+
   /*
-   * purpose: print the tree in postorder
+   * purpose: postorder traversal of the tree
    * input: node
    * return: nothing - prints out postorder
    */
+  public void postorder(Node node)
+  {
+    if (node != null)
+    {
+      postorder(node.left);
+      postorder(node.right);
+      System.out.print(" " + node.num);
+    }
+  }
+
+  // runs postorder() with root node
   public void printPostorder()
   {
-    if (root != null)
-    {
-      printPostorder(root.left);
-      printPostorder(root.right);
-      System.out.print(" " + root.num);
-    }
+    postorder(root);
   }
 
 }
@@ -114,18 +134,27 @@ public class ArizzaBinaryTree
     
     BinaryTree bt = new BinaryTree();
     
-    bt.add(3);
-    bt.add(2);
-    bt.add(4);
-    bt.add(1);
-    bt.add(5);
+    bt.insert(7);
+    bt.insert(1);
+    bt.insert(9);
+    bt.insert(0);
+    bt.insert(3);
+    bt.insert(8);
+    bt.insert(10);
+    bt.insert(2);
+    bt.insert(5);
+    bt.insert(4);
+    bt.insert(6);
 
     System.out.println("Inorder: ");
     bt.printInorder();
+    System.out.println();
     System.out.println("Preorder: ");
     bt.printPreorder();
+    System.out.println();
     System.out.println("Postorder: ");
-    bt.printPostOrder();
+    bt.printPostorder();
+    System.out.println();
   }
 
 }
