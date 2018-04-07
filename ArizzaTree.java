@@ -29,6 +29,10 @@ class Node
 class BinaryTree
 {
   protected Node root;
+  //protected BinaryTree leftSub, rightSub;
+
+  // constructor
+  public BinaryTree() {root = null;}
 
   public void insert(int num)
   {
