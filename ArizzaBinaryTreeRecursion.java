@@ -1,5 +1,3 @@
-//package asn5;
-
 class Node
 {
   protected int num;
@@ -123,7 +121,7 @@ class BinaryTree
 
 }
 
-public class ArizzaBinaryTree
+public class ArizzaBinaryTreeRecursion
 { 
   /**
    * purpose: test code
