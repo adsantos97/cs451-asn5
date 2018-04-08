@@ -52,6 +52,10 @@ class Node
     return false;
   }
 
+  public String preorder() { return " " + num + " "; }
+  public String inorder() { return " " + num + " "; }
+  public String postorder() { return " " + num + " "; }
+
 }
 
 class BinaryTree
@@ -66,7 +70,7 @@ class BinaryTree
    * input: n - number to insert
    * return: true if number was inserted, false otherwise
    */
-  public void insert(int n)
+  public boolean insert(int n)
   {
     if (root == null)
     {
@@ -77,6 +81,24 @@ class BinaryTree
     {
       return root.insert(n);
     }
+  }
+
+  public String inorder()
+  {
+    return root.getLeft().inorder() + root.inorder() 
+           + root.getRight().inorder();
+  }
+
+  public String preorder()
+  {
+    return root.preorder() + root.getLeft().preorder() 
+           + root.getRight().preorder();
+  }
+
+  public String postorder()
+  {
+    return root.getLeft().postorder() + root.getRight().postorder()
+           + root.postorder();
   }
 
 }
@@ -103,16 +125,13 @@ public class ArizzaTree
     bt.insert(5);
     bt.insert(4);
     bt.insert(6);
-
+  
     System.out.println("Inorder: ");
-    bt.printInorder();
-    System.out.println();
+    System.out.println(bt.inorder());
     System.out.println("Preorder: ");
-    bt.printPreorder();
-    System.out.println();
+    System.out.println(bt.preorder());
     System.out.println("Postorder: ");
-    bt.printPostorder();
-    System.out.println();
+    System.out.println(bt.postorder());
   }
 
 }
