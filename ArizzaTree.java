@@ -2,14 +2,14 @@ class Node
 {
   // instance variables
   protected int num;
-  protected Node left, right;
+  protected BinaryTree left, right;
 
   // constructor
   public Node(int num)
   {
     this.num = num;
-    right = null;
-    left = null;
+    right = new BinaryTree();
+    left = new BinaryTree();
   }
 
   // setter and getter for num of node
@@ -17,19 +17,19 @@ class Node
   public int getNum() { return num; }
 
   // setter and getter for left of node
-  public void setLeft(Node left) { this.left = left; }
-  public Node getLeft() { return left; }
+  public void setLeftChild(BinaryTree l) { left = l; }
+  public BinaryTree getLeftChild() { return left; }
 
   // setter and getter for right of node
-  public void setRight(Node right) { this.right = right; }
-  public Node getRight() { return right; }
+  public void setRightChild(BinaryTree r) { right = r; }
+  public BinaryTree getRightChild() { return right; }
 
   /*
    * purpose: insert a number
    * input: n - number to insert
    * return: true if number was inserted, false otherwise
    */
-  public boolean insert(int n)
+/*  public boolean insert(int n)
   {
     if (n == num)
       return true;
@@ -51,29 +51,48 @@ class Node
      
     return false;
   }
-
+*/
+/*
   public String preorder() { return " " + num + " "; }
   public String inorder() { return " " + num + " "; }
   public String postorder() { return " " + num + " "; }
-
+*/
 }
 
 class BinaryTree
 {
   protected Node root;
-  protected BinaryTree left;
-  protected BinaryTree right;
+  //protected BinaryTree left;
+  //protected BinaryTree right;
 
   // constructor
   public BinaryTree()
   { 
     root = null;
-    left = right = null; 
+    //left = right = null; 
   }
-
+  
+  // parameterized constructor
   public BinaryTree(Node n)
   {
     root = n;
+  }
+
+  public BinaryTree getLeft()
+  {
+    BinaryTree t = root.getLeftChild();
+    return t;
+  }
+
+  public BinaryTree getRight()
+  {
+    BinaryTree t = root.getRightChild();
+    return t;
+  }
+
+  public boolean emptyTree()
+  {
+    return (root == null);
   }
 
   /*
@@ -83,33 +102,48 @@ class BinaryTree
    */
   public boolean insert(int n)
   {
+    Node nd = new Node(n);
     if (root == null)
     {
-      root = new Node(n);
+      root = nd;
       return true;
-    }
-    
-    if (left == null)
+    }  
+    else if (root.getNum() < n)
     {
-      left = new BinaryTree();
+      if (root.getLeftChild().emptyTree())
+      {
+        root.setLeftChild(new BinaryTree(nd));
+      }
+      else
+      {
+        return root.getLeftChild().insert(n);
+      }
     }
     else
     {
-      return left.insert(n);
+      if (root.getRightChild().emptyTree())
+      {
+        root.setRightChild(new BinaryTree(nd));
+      }
+      else
+      {
+        return root.getRightChild().insert(n);
+      }
     }
 
-    if (right == null)
-    {
-      right = new BinaryTree();
-    }
-    else
-    {
-      return right.insert(n);
-    }
-
-    return false;
+    return false;  
   }
 
+  public String toString()
+  {
+    if (root == null)
+      return " ";
+    else
+      return root.getNum() + " ( " + getLeft().toString() + " ) ( " 
+             + getRight().toString() + " )";
+  }
+
+/*
   public String inorder()
   {
     return left.inorder() + root.getNum() 
@@ -127,7 +161,7 @@ class BinaryTree
     return left.postorder() + right.postorder()
            + root.getNum();
   }
-
+*/
 }
 
 public class ArizzaTree
@@ -154,11 +188,13 @@ public class ArizzaTree
     bt.insert(6);
   
     System.out.println("Inorder: ");
-    System.out.println(bt.inorder());
+    System.out.println(bt);
+/*
     System.out.println("Preorder: ");
     System.out.println(bt.preorder());
     System.out.println("Postorder: ");
     System.out.println(bt.postorder());
+*/
   }
 
 }
