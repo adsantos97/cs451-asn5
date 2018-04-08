@@ -13,38 +13,75 @@ class Node
   }
 
   // setter and getter for num of node
-  public void setNum(int num) {this.num = num;}
-  public int getNum() {return num;}
+  public void setNum(int num) { this.num = num; }
+  public int getNum() { return num; }
 
   // setter and getter for left of node
-  public void setLeft(Node left) {this.left = left;}
-  public Node getLeft() {return left;}
+  public void setLeft(Node left) { this.left = left; }
+  public Node getLeft() { return left; }
 
   // setter and getter for right of node
-  public void setRight(Node right) {this.right = right;}
-  public Node getRight() {return right;}
+  public void setRight(Node right) { this.right = right; }
+  public Node getRight() { return right; }
+
+  /*
+   * purpose: insert a number
+   * input: n - number to insert
+   * return: true if number was inserted, false otherwise
+   */
+  public boolean insert(int n)
+  {
+    if (n == num)
+      return true;
+
+    if (n < num)
+    {
+      if (left == null)
+        left = new Node(n);
+      else
+        return left.insert(n);
+    }
+    else
+    {
+      if (right == null)
+        right = new Node(n);
+      else
+        return right.insert(n);
+    }
+     
+    return false;
+  }
 
 }
 
 class BinaryTree
 {
   protected Node root;
-  //protected BinaryTree leftSub, rightSub;
 
   // constructor
   public BinaryTree() {root = null;}
 
-  public void insert(int num)
+  /*
+   * purpose: insert a number starting from root
+   * input: n - number to insert
+   * return: true if number was inserted, false otherwise
+   */
+  public void insert(int n)
   {
     if (root == null)
     {
-      root = new Node(num);
+      root = new Node(n);
+      return true;
+    }
+    else
+    {
+      return root.insert(n);
     }
   }
 
 }
 
-public class ArizzaBinaryTreeRecursion
+public class ArizzaTree
 { 
   /**
    * purpose: test code
