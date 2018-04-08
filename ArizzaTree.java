@@ -61,9 +61,20 @@ class Node
 class BinaryTree
 {
   protected Node root;
+  protected BinaryTree left;
+  protected BinaryTree right;
 
   // constructor
-  public BinaryTree() {root = null;}
+  public BinaryTree()
+  { 
+    root = null;
+    left = right = null; 
+  }
+
+  public BinaryTree(Node n)
+  {
+    root = n;
+  }
 
   /*
    * purpose: insert a number starting from root
@@ -77,28 +88,44 @@ class BinaryTree
       root = new Node(n);
       return true;
     }
+    
+    if (left == null)
+    {
+      left = new BinaryTree();
+    }
     else
     {
-      return root.insert(n);
+      return left.insert(n);
     }
+
+    if (right == null)
+    {
+      right = new BinaryTree();
+    }
+    else
+    {
+      return right.insert(n);
+    }
+
+    return false;
   }
 
   public String inorder()
   {
-    return root.getLeft().inorder() + root.inorder() 
-           + root.getRight().inorder();
+    return left.inorder() + root.getNum() 
+           + right.inorder();
   }
 
   public String preorder()
   {
-    return root.preorder() + root.getLeft().preorder() 
-           + root.getRight().preorder();
+    return root.getNum() + left.preorder() 
+           + right.preorder();
   }
 
   public String postorder()
   {
-    return root.getLeft().postorder() + root.getRight().postorder()
-           + root.postorder();
+    return left.postorder() + right.postorder()
+           + root.getNum();
   }
 
 }
