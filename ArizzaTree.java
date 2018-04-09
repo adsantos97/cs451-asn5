@@ -24,10 +24,6 @@ class Node
   public void setRightChild(BinaryTree r) { right = r; }
   public BinaryTree getRightChild() { return right; }
 
-  public String toString()
-  {
-    return " " + num + " ";
-  }
 }
 
 class BinaryTree
@@ -118,15 +114,16 @@ class BinaryTree
   public String preorder()
   {
     if (root == null)
-      return " ";
-    else return root.getNum() + getLeft().inorder() + getRight().inorder();
+      return "";
+    else return " " + root.getNum() + getLeft().preorder() + getRight().preorder();
   }
 
   public String postorder()
   {
     if (root == null)
-      return " ";
-    else return getLeft().inorder() + getRight().inorder() + root.getNum(); 
+      return "";
+    else return getLeft().postorder() + getRight().postorder() + " "
+                + root.getNum(); 
   }
 
 }
