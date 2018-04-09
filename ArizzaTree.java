@@ -24,56 +24,20 @@ class Node
   public void setRightChild(BinaryTree r) { right = r; }
   public BinaryTree getRightChild() { return right; }
 
-  /*
-   * purpose: insert a number
-   * input: n - number to insert
-   * return: true if number was inserted, false otherwise
-   */
-/*  public boolean insert(int n)
-  {
-    if (n == num)
-      return true;
-
-    if (n < num)
-    {
-      if (left == null)
-        left = new Node(n);
-      else
-        return left.insert(n);
-    }
-    else
-    {
-      if (right == null)
-        right = new Node(n);
-      else
-        return right.insert(n);
-    }
-     
-    return false;
-  }
-*/
-/*
-  public String preorder() { return " " + num + " "; }
-  public String inorder() { return " " + num + " "; }
-  public String postorder() { return " " + num + " "; }
-*/
   public String toString()
   {
-    return " " + num;
+    return " " + num + " ";
   }
 }
 
 class BinaryTree
 {
   protected Node root;
-  //protected BinaryTree left;
-  //protected BinaryTree right;
 
   // constructor
   public BinaryTree()
   { 
-    root = null;
-    //left = right = null; 
+    root = null; 
   }
   
   // parameterized constructor
@@ -143,33 +107,28 @@ class BinaryTree
     return false;  
   }
 
-  public String toString()
+  public String inorder()
   {
     if (root == null)
       return " ";
     else
-      return root.getNum() + " ";//+ " ( " + getLeft().toString() + " ) ( " 
-             //+ getRight().toString() + " )";
+      return getLeft().inorder() + root.getNum() + getRight().inorder();
   }
 
-  public String inorder()
-  {
-    return getLeft().inorder().toString() + " " + root.getNum();
-  }
-
-/*
   public String preorder()
   {
-    return root.getNum() + left.preorder() 
-           + right.preorder();
+    if (root == null)
+      return " ";
+    else return root.getNum() + getLeft().inorder() + getRight().inorder();
   }
 
   public String postorder()
   {
-    return left.postorder() + right.postorder()
-           + root.getNum();
+    if (root == null)
+      return " ";
+    else return getLeft().inorder() + getRight().inorder() + root.getNum(); 
   }
-*/
+
 }
 
 public class ArizzaTree
@@ -190,19 +149,18 @@ public class ArizzaTree
     bt.insert(3);
     bt.insert(8);
     bt.insert(10);
-/*    bt.insert(2);
+    bt.insert(2);
     bt.insert(5);
     bt.insert(4);
     bt.insert(6);
-*/  
+  
     System.out.println("Inorder: ");
     System.out.println(bt.inorder());
-/*
     System.out.println("Preorder: ");
     System.out.println(bt.preorder());
     System.out.println("Postorder: ");
     System.out.println(bt.postorder());
-*/
+
   }
 
 }
