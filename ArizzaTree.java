@@ -204,7 +204,9 @@ public class ArizzaTree
     bt.printPostorder();
     System.out.println();
     
-    /* Tests
+    // Tests
+      BinaryTree none = new BinaryTree();
+      System.out.println(none);
 
       // tree with one number
       BinaryTree one = new BinaryTree();
@@ -233,6 +235,6 @@ public class ArizzaTree
       withRight.printInorder(); // 6 7 8
       withRight.printPreorder(); // 7 6 8
       withRight.printPostorder(); // 6 8 7
-     */
+     
   }
 }
