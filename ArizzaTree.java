@@ -15,6 +15,33 @@ class Node
     left = new BinaryTree();
   }
 
+  /*
+   * purpose: insert a number 
+   * input: n - number to insert
+   * return: true if number was inserted, false otherwise
+   */
+  public boolean insert(int n)
+  {
+    Node nd = new Node(n);
+
+    if (n < num)
+    {
+      if (left.emptyTree())
+        left = new BinaryTree(nd);
+      else
+        return left.insert(n);
+    }
+    else
+    {
+      if (right.emptyTree())
+        right = new BinaryTree(nd);
+      else
+        return right.insert(n);
+    }
+
+    return false;  
+  }
+
 }
 
 class BinaryTree
@@ -33,43 +60,21 @@ class BinaryTree
   public boolean emptyTree() { return (root == null); }
 
   /*
-   * purpose: insert a number starting from root
+   * purpose: insert a number starting from root; delegates to Node class
    * input: n - number to insert
    * return: true if number was inserted, false otherwise
    */
   public boolean insert(int n)
   {
-    Node nd = new Node(n);
+    Node newNode = new Node(n);
     if (root == null)
-    {
-      root = nd;
-      return true;
-    }  
-    else if (n < root.num)
-    {
-      if (root.left.emptyTree())
-      {
-        root.left = new BinaryTree(nd);
-      }
-      else
-      {
-        return root.left.insert(n);
-      }
-    }
+      root = newNode;
     else
-    {
-      if (root.right.emptyTree())
-      {
-        root.right = new BinaryTree(nd);
-      }
-      else
-      {
-        return root.right.insert(n);
-      }
-    }
+      return root.insert(n);
 
     return false;  
   }
+
 
   /*
    * purpose: inorder traversal of the tree
@@ -138,7 +143,7 @@ class BinaryTree
   public String toString()
   {
     if (root == null)
-      return " ";
+      return "\'null\'";
     else
       return root.num + " (" + root.left.toString() + ") (" 
              + root.right.toString() + ") "; 
@@ -176,37 +181,45 @@ public class ArizzaTree
     bt.printPostorder();
     System.out.println();
     
-    // Tests
+    /* Tests
+ 
+      // empty tree
       BinaryTree none = new BinaryTree();
       System.out.println(none);
 
-      // tree with one number
+      // tree with one number (root)
       BinaryTree one = new BinaryTree();
       one.insert(7);
-      System.out.println(one); // 7 () ()
+      System.out.println(one); // 7 ('null') ('null')
 
-      // tree with one number using a node
+      // tree with one number using a parameterized constructor
       Node n = new Node(7);
       BinaryTree oneNode = new BinaryTree(n);
-      System.out.println(oneNode); // 7 () ()
+      System.out.println(oneNode); // 7 ('null') ('null')
 
-      // tree with left child
+      // tree with left child only
       BinaryTree withLeft = new BinaryTree();
       withLeft.insert(7);
       withLeft.insert(6);
-      System.out.println(withLeft); // 7 (6 () () ) ()
-      
-      // tree with right child
+      System.out.println(withLeft); // 7 (6 ('null') ('null') ) ('null')
+
+      // tree with right child only
       BinaryTree withRight = new BinaryTree();
       withRight.insert(7);
-      withRight.insert(6);
       withRight.insert(8);
-      System.out.println(withRight); // 7 (6 () () ) (8 () () )
+      System.out.println(withRight); // 7 ('null') (8 ('null') ('null') )
+      
+      // tree with left and right child
+      BinaryTree withLR = new BinaryTree();
+      withLR.insert(7);
+      withLR.insert(6);
+      withLR.insert(8);
+      System.out.println(withLR); // 7 (6 ('null') ('null') ) (8 ('null') ('null') )
 
       // test traversals
-      withRight.printInorder(); // 6 7 8
-      withRight.printPreorder(); // 7 6 8
-      withRight.printPostorder(); // 6 8 7
-     
+      withLR.printInorder(); // 6 7 8
+      withLR.printPreorder(); // 7 6 8
+      withLR.printPostorder(); // 6 8 7
+      */ 
   }
 }
