@@ -15,18 +15,6 @@ class Node
     left = new BinaryTree();
   }
 
-  // setter and getter for num of node
-  public void setNum(int num) { this.num = num; }
-  public int getNum() { return num; }
-
-  // setter and getter for left child of node
-  public void setLeftChild(BinaryTree l) { left = l; }
-  public BinaryTree getLeftChild() { return left; }
-
-  // setter and getter for right child of node
-  public void setRightChild(BinaryTree r) { right = r; }
-  public BinaryTree getRightChild() { return right; }
-
 }
 
 class BinaryTree
@@ -36,22 +24,6 @@ class BinaryTree
   // constructors
   public BinaryTree() { root = null; }
   public BinaryTree(Node n) { root = n; }
-
-  public Node getRoot() { return root; }
-
-  // get left subtree
-  public BinaryTree getLeft() 
-  { 
-    BinaryTree t = root.getLeftChild();
-    return t;
-  }
-
-  // get right subtree
-  public BinaryTree getRight()
-  {
-    BinaryTree t = root.getRightChild();
-    return t;
-  }
 
   /*
    * purpose: checks if tree is empty
@@ -73,26 +45,26 @@ class BinaryTree
       root = nd;
       return true;
     }  
-    else if (n < root.getNum())
+    else if (n < root.num)
     {
-      if (root.getLeftChild().emptyTree())
+      if (root.left.emptyTree())
       {
-        root.setLeftChild(new BinaryTree(nd));
+        root.left = new BinaryTree(nd);
       }
       else
       {
-        return root.getLeftChild().insert(n);
+        return root.left.insert(n);
       }
     }
     else
     {
-      if (root.getRightChild().emptyTree())
+      if (root.right.emptyTree())
       {
-        root.setRightChild(new BinaryTree(nd));
+        root.right = new BinaryTree(nd);
       }
       else
       {
-        return root.getRightChild().insert(n);
+        return root.right.insert(n);
       }
     }
 
@@ -109,7 +81,7 @@ class BinaryTree
     if (root == null)
       return " ";
     else
-      return getLeft().inorder() + root.getNum() + getRight().inorder();
+      return root.left.inorder() + root.num + root.right.inorder();
   }
 
   /*
@@ -128,7 +100,7 @@ class BinaryTree
   {
     if (root == null)
       return "";
-    else return " " + root.getNum() + getLeft().preorder() + getRight().preorder();
+    else return " " + root.num + root.left.preorder() + root.right.preorder();
   }
 
   /*
@@ -147,8 +119,8 @@ class BinaryTree
   {
     if (root == null)
       return "";
-    else return getLeft().postorder() + getRight().postorder() + " "
-                + root.getNum(); 
+    else return root.left.postorder() + root.right.postorder() + " "
+                + root.num; 
   }
 
   /*
@@ -168,8 +140,8 @@ class BinaryTree
     if (root == null)
       return " ";
     else
-      return root.getNum() + " (" + getLeft().toString() + ") (" 
-             + getRight().toString() + ") "; 
+      return root.num + " (" + root.left.toString() + ") (" 
+             + root.right.toString() + ") "; 
   }
 
 }
